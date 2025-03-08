@@ -18,17 +18,17 @@
         h1 {
             background-color: #4CAF50;
             color: white;
-            padding: 20px;
+            padding: 10px;
             margin: 0;
         }
 
         h2 {
-            margin-top: 30px;
+            margin-top: 10px;
             font-size: 1.5em;
         }
 
         form {
-            margin-top: 20px;
+            margin-top: 10px;
         }
 
         input {
@@ -55,7 +55,7 @@
         }
 
         .result {
-            margin-top: 5px;
+            margin-top: 2px;
             padding: 5px;
             border-radius: 5px;
             background-color: #fff;
@@ -82,14 +82,14 @@
             white-space: pre-wrap;
             word-wrap: break-word;
             background-color: #f4f4f4;
-            padding: 15px;
+            padding: 5px;
             border-radius: 5px;
             border: 1px solid #ddd;
-            margin-top: 10px;
+            margin-top: 5px;
         }
 
         .legend {
-            margin-top: 30px;
+            margin-top: 10px;
             font-size: 1.1em;
             background-color: #f0f0f0;
             padding: 20px;
@@ -117,6 +117,10 @@
         <button type="submit">Obtener Colores</button>
     </form>
 
+
+    <h2>Resultado:</h2>
+    <pre id="result"></pre>
+
     <div class="legend">
         <ul>
             <li><strong>Blanco/White</strong> - W</li>
@@ -126,10 +130,6 @@
             <li><strong>Verde/Green</strong> - G</li>
         </ul>
     </div>
-
-    <h2>Resultado:</h2>
-    <pre id="result"></pre>
-
 
     <script>
         document.getElementById('findByColorForm').addEventListener('submit', function(e) {
