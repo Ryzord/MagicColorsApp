@@ -101,6 +101,7 @@
             margin: 0;
         }
     </style>
+    @laravelPWA
 </head>
 
 <body>
