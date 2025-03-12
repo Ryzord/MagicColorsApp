@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Combinaciones de Colores Magic: The Gathering</title>
+    <title>Colores Magic: The Gathering</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -27,6 +27,19 @@
             font-size: 1.5em;
         }
 
+        h2 > img {
+            width: 150px;
+            height: 150px;
+            margin: auto;
+        }
+
+        button > img {
+            width: 50px;
+            height: 50px;
+            margin: auto;
+            padding: 0;
+        }
+
         form {
             margin-top: 10px;
         }
@@ -40,7 +53,7 @@
             font-size: 1em;
         }
 
-        button {
+        /* button {
             padding: 10px 15px;
             font-size: 1em;
             background-color: #4CAF50;
@@ -48,14 +61,14 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-        }
+        } */
 
         button:hover {
             background-color: #45a049;
         }
 
         .color-button {
-            padding: 20px;
+            padding: 0px;
             margin: 10px;
             border-radius: 5px;
             cursor: pointer;
@@ -68,11 +81,26 @@
             opacity: 0.8;
         }
 
-        .white { background-color: #ffffff; color: #000; }
-        .blue { background-color: #1E90FF; }
-        .black { background-color: #000000; }
-        .red { background-color: #FF6347; }
-        .green { background-color: #32CD32; }
+        .white {
+            background-color: #ffffff;
+            color: #000;
+        }
+
+        .blue {
+            background-color: #1E90FF;
+        }
+
+        .black {
+            background-color: #000000;
+        }
+
+        .red {
+            background-color: #FF6347;
+        }
+
+        .green {
+            background-color: #32CD32;
+        }
 
         .result {
             margin-top: 2px;
@@ -116,43 +144,34 @@
             border: 1px solid #ddd;
             margin-top: 5px;
         }
-
-        .legend {
-            margin-top: 10px;
-            font-size: 1.1em;
-            background-color: #f0f0f0;
-            padding: 20px;
-            border-radius: 5px;
-            display: inline-block;
-        }
-
-        .legend p {
-            margin: 0;
-        }
     </style>
     {{-- PWA assets --}}
     @laravelPWA
 </head>
 
 <body>
-    <h1>Combinaciones de Colores Magic: The Gathering</h1>
+    <h1>Colores Magic: The Gathering</h1>
 
     <h2>Selecciona los colores</h2>
 
     <!-- Color Buttons -->
     <div>
-        <button class="color-button white" data-color="Blanco">Blanco</button>
-        <button class="color-button blue" data-color="Azul">Azul</button>
-        <button class="color-button black" data-color="Negro">Negro</button>
-        <button class="color-button red" data-color="Rojo">Rojo</button>
-        <button class="color-button green" data-color="Verde">Verde</button>
+        <button class="color-button white" data-color="Blanco">
+            <img src="/images/combinations/MonoWhite.png" alt="">
+        </button>
+        <button class="color-button blue" data-color="Azul">
+            <img src="/images/combinations/MonoBlue.png" alt="">
+        </button>
+        <button class="color-button black" data-color="Negro">
+            <img src="/images/combinations/MonoBlack.png" alt="">
+        </button>
+        <button class="color-button red" data-color="Rojo">
+            <img src="/images/combinations/MonoRed.png" alt="">
+        </button>
+        <button class="color-button green" data-color="Verde">
+            <img src="/images/combinations/MonoGreen.png" alt="">
+        </button>
     </div>
-
-    {{-- <h2>Buscar por Colores</h2>
-    <form id="findByColorForm">
-        <input type="text" id="colors" placeholder="Ingresa colores (ej: W,U,R,B)" />
-        <button type="submit">Obtener Combinación</button>
-    </form> --}}
 
     <h2>Buscar por Nombre</h2>
     <form id="findByNameForm">
@@ -160,21 +179,12 @@
         <button type="submit">Obtener Colores</button>
     </form>
 
-
     <h2>Resultado:</h2>
     <pre id="result"></pre>
 
-    {{-- <div class="legend">
-        <ul>
-            <li><strong>Blanco/White</strong> - W</li>
-            <li><strong>Azul/Blue</strong> - U</li>
-            <li><strong>Negro/Black</strong> - B</li>
-            <li><strong>Rojo/Red</strong> - R</li>
-            <li><strong>Verde/Green</strong> - G</li>
-        </ul>
-    </div> --}}
-
     <script>
+
+        //JS DEL BUSQUEDA POR SELECTOR DE COLOR
         // Variables para los botones
         const buttons = document.querySelectorAll('.color-button');
         const selectedColors = [];
@@ -191,7 +201,7 @@
                     this.style.opacity = 1; // Vuelve a la opacidad normal
                 } else {
                     selectedColors.push(color); // Agregar color a la lista
-                    this.style.opacity = 0.7; // Marca el color como seleccionado
+                    this.style.opacity = 0.1; // Marca el color como seleccionado
                 }
 
                 // Realizar la búsqueda de la combinación en el backend
@@ -200,14 +210,14 @@
                         .then(response => response.json())
                         .then(data => {
                             const resultDiv = document.getElementById('result');
+                            // const url = data.image_url;
                             if (data.error) {
                                 resultDiv.innerHTML = `<div class="error">${data.error}</div>`;
                             } else {
                                 resultDiv.innerHTML = `
-                                    <h3>Combinación Encontrada:</h3>
-                                    <h2><strong>Nombre:</strong> ${data.name}</h2>
+                                    <h2><img src="${data.image_url}"/></h2>
+                                    <h2><strong>Nombre:</strong> ${data.name} </h2>
                                     <h2><strong>Colores:</strong> ${data.colors.join(', ')}</h2>
-                                    <!-- <div class="json-result">${JSON.stringify(data, null, 2)}</div>-->
                                 `;
                             }
                         })
@@ -222,32 +232,7 @@
             });
         });
 
-        // document.getElementById('findByColorForm').addEventListener('submit', function(e) {
-        //     e.preventDefault();
-        //     let colors = document.getElementById('colors').value.split(',').map(color => color.trim()
-        // .toUpperCase());
-
-        //     fetch(`/combination/by-colors?colors[]=${colors.join('&colors[]=')}`)
-        //         .then(response => response.json())
-        //         .then(data => {
-        //             let resultDiv = document.getElementById('result');
-        //             if (data.error) {
-        //                 resultDiv.innerHTML = `<div class="error">${data.error}</div>`;
-        //             } else {
-        //                 resultDiv.innerHTML = `
-        //                     <h3>Combinación Encontrada:</h3>
-        //                     <h3><strong>Nombre:</strong> ${data.name}</h3>
-        //                     <h3><strong>Colores:</strong> ${data.colors.join(', ')}</h3>
-        //                     <!-- <div class="json-result">${JSON.stringify(data, null, 2)}</div> -->
-        //                 `;
-        //             }
-        //         })
-        //         .catch(error => {
-        //             let resultDiv = document.getElementById('result');
-        //             resultDiv.innerHTML = `<div class="error">Ocurrió un error. Intenta más tarde.</div>`;
-        //         });
-        // });
-
+        // JS DEL BUSQUEDA POR NOMBRE
         document.getElementById('findByNameForm').addEventListener('submit', function(e) {
             e.preventDefault();
             let name = document.getElementById('name').value.trim();
@@ -260,10 +245,9 @@
                         resultDiv.innerHTML = `<div class="error">${data.error}</div>`;
                     } else {
                         resultDiv.innerHTML = `
-                            <h3>Combinación Encontrada:</h3>
+                            <h2><img src="${data.image_url}"/></h2>
                             <h2><strong>Nombre:</strong> ${data.name}</h2>
                             <h2><strong>Colores:</strong> ${data.colors.join(', ')}</h2>
-                            <!-- <div class="json-result">${JSON.stringify(data, null, 2)}</div> -->
                         `;
                     }
                 })

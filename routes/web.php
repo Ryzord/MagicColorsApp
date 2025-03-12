@@ -7,7 +7,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
 Route::get('/combination/by-colors', [ColorCombinationController::class, 'findByColors']);
 
 Route::get('/combination/by-name', [ColorCombinationController::class, 'findByName']);
