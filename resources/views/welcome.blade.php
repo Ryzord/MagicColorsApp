@@ -28,8 +28,8 @@
         }
 
         h2 > img {
-            width: 150px;
-            height: 150px;
+            width: 100px;
+            height: 100px;
             margin: auto;
         }
 
@@ -75,6 +75,7 @@
             color: white;
             font-weight: bold;
             transition: background-color 0.3s;
+            opacity: 0.2;
         }
 
         .color-button:hover {
@@ -198,10 +199,10 @@
                 if (selectedColors.includes(color)) {
                     const index = selectedColors.indexOf(color);
                     selectedColors.splice(index, 1); // Eliminar el color de la lista
-                    this.style.opacity = 1; // Vuelve a la opacidad normal
+                    this.style.opacity = 0.2; // Vuelve a la opacidad normal
                 } else {
                     selectedColors.push(color); // Agregar color a la lista
-                    this.style.opacity = 0.1; // Marca el color como seleccionado
+                    this.style.opacity = 1; // Marca el color como seleccionado
                 }
 
                 // Realizar la búsqueda de la combinación en el backend

@@ -41,16 +41,10 @@ class ColorCombinationController extends Controller
         if ($combination) {
             $url = "images/combinations/" . $combination->name . ".png";
 
-            // return response()->json([
-            //     'name' => $combination->name,
-            //     'colors' => $combination->colors,
-            //     'image_url' => $url
-            // ]);
-
             return response()->json([
                 'name' => $combination->name,
                 'colors' => $combination->colors,
-                'image_url' => asset($combination->image_url)
+                'image_url' => $url
             ]);
         }
 
